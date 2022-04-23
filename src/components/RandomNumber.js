@@ -11,14 +11,15 @@ class RandomNumber extends React.Component {
     };
     
     handlePress = () =>{
-        // console.log(this.props.number); 
+        console.log(this.props.number); 
+        if(this.props.isDisabled){return;}
         this.props.onPress(this.props.id);
     }
     render() {
         return(
             <Text >{console}</Text>,
             <TouchableOpacity onPress={this.handlePress}>
-            <Text style={[styles.random, this.props.isDisabled && styles.Disabled]}>Q{/* {this.props.number} */}</Text>   
+            <Text style={[styles.random, this.props.isDisabled && styles.Disabled]}>{this.props.number}</Text>   
             </TouchableOpacity>
         );
     }     
