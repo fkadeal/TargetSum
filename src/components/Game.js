@@ -6,11 +6,13 @@ import RandomNumber from "./RandomNumber";
 class Game extends React.Component{
     static propTypes={
         randomNumberCount: PropTypes.number.isRequired,
+        initialSeconds:PropTypes.number.isRequired,
     };
 
 
     state={
         selectedIds:[],
+        remainingSeconds: this.props.initialSeconds,
     };
 
     isNumberSelected = (numberIndex) =>{
@@ -20,9 +22,24 @@ class Game extends React.Component{
     selectNumber = (numberIndex) => {
     this.setState((prevState) =>({
         selectedIds:[...prevState.selectedIds, numberIndex],
-    })
-    );
-};
+    }));
+    };
+
+    componentDidMount(){
+        this.intervalId=setInterval(() => {
+            this.setState((prevState) => {
+                return {remainingSeconds : prevState.remainingSeconds -1}
+            },() => {
+                if(this.state.remainingSeconds === 0){
+                    clearInterval(this.intervalId);
+                }
+            });
+        },1000)
+    };
+
+    componentWillUnmount(){
+        clearInterval(this.intervalId);
+    }
 
     randomNumbers = Array.from({length:this.props.randomNumberCount})
     .map(() => 1 + Math.floor(10 * Math.random()) );
@@ -35,6 +52,9 @@ class Game extends React.Component{
             return acc + this.randomNumbers[curr];
         },0)
         console.warn(sumSelected);
+        if(this.state.remainingSeconds === 0){
+            return 'LOSS';
+        }
         if(sumSelected < this.target){
             return 'PLAYING';
         }
@@ -62,9 +82,9 @@ class Game extends React.Component{
                 number={randomNumber} 
                 isDisabled={this.isNumberSelected(index) || gameStatus !== 'PLAYING'} 
                 onPress={this.selectNumber}/>  
-                 )}  
+                 )}
              </View>
-             <Text >{gameStatus}</Text>
+             <Text>{gameStatus +' '+ this.state.remainingSeconds}</Text>
             </View>
         ) 
     }
