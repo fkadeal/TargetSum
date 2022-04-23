@@ -1,15 +1,22 @@
 import React from "react";
 import  PropTypes from "prop-types";
-import { Text, StyleSheet} from "react-native";
+import { Text, TouchableOpacity, StyleSheet} from "react-native";
 
-class RandomNumber extends React.Component {
+class RandomNumber extends React.Component { 
     static PropTypes = {
         number: PropTypes.number.isRequired,  
+        isSelected: PropTypes.bool.isRequired,
     };
-
+    
+    handlePress = () =>{
+        // console.log(this.props.number); 
+    }
     render() {
         return(
-            <Text style={styles.random}>{this.props.number}</Text>   
+            <Text >{console}</Text>,
+            <TouchableOpacity onPress={this.handlePress}>
+            <Text style={[styles.random, this.props.isSelected && styles.selected]}>Q{/* {this.props.number} */}</Text>   
+            </TouchableOpacity>
         );
     }     
 }
@@ -21,6 +28,9 @@ const styles = StyleSheet.create({
         marginVertical:25,
         fontSize:35,
         textAlign:"center",
+    },
+    selected:{
+        opacity:0.3,
     }
 })
 
