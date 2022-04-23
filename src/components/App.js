@@ -1,22 +1,12 @@
-import React from "react";
-import {View , Text, StyleSheet} from "react-native";
+import React from "react"; 
+import Game from "./Game"
 
 class App extends React.Component{
     render(){
         return(
-            <View style={styles.container}>
-                 
-            </View>
+           <Game />
         ) 
     }
-}
-
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:'#dddf',
-        flex:1,
-
-    }
-})
+} 
 
 export default App;

@@ -7,7 +7,7 @@ module.exports = {
     node:true,
     jest:true,
   },
-  extends: ['eslint:recommended','plugin:react/recommended','@react-native-community'],
+  extends: ['eslint:recommended','plugin:react/recommended'],
   parserOptions:{
     ecmaFeatures:{
       experimentalObjectRestSpread:true,
@@ -26,5 +26,5 @@ module.exports = {
     'no-console':['warn',{allow:['info','error']}],
     'arrow-parens':['error','always'],
   },
-  root: true,
+  // root: true,
 };
